@@ -26,10 +26,10 @@ namespace TestProject1
             options.AddArguments("disable-dev-shm-usage");
             options.AddArguments("disable-gpu");
             options.AddArguments("window-size=1920x1080");
-            options.AddArguments("disable-extension");
+            options.AddArguments("disable-extensions");
             options.AddArguments("remote-debugging-port=9222");
 
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Url = "http://softuni-qa-loadbalancer-2137572849.eu-north-1.elb.amazonaws.com/number-calculator/";
 
@@ -45,6 +45,7 @@ namespace TestProject1
         public void TearDown()
         {
             driver.Quit();
+            driver.Dispose();
         }
 
         public void PerformCalculation(string firstNumber, string operation,
